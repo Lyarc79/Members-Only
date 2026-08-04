@@ -21,7 +21,7 @@ const validateSignup = [
     .isEmail()
     .withMessage("You must enter a valid email adress (e.g., example@mail.com)")
     .custom(async (value) => {
-      const user = await db.findUserByUsername(value);
+      const user = await db.getUserByUsername(value);
       if (user) {
         throw new Error("E-mail is already in use");
       }
