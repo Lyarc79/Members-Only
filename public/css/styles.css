@@ -1,0 +1,61 @@
+/* =========================================
+    GLOBAL
+   ========================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* =========================================
+    HEADER
+   ========================================= */
+
+.main-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-family: sans-serif;
+  padding: 20px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid pink;
+}
+
+.header-right-links {
+  display: flex;
+  gap: 3rem;
+}
+
+/* =========================================
+    MAIN
+   ========================================= */
+
+main {
+  padding: 2rem;
+  max-width: 1200px;
+}
+
+/* =========================================
+    ERROR BOX & PAGE
+   ========================================= */
+
+.error-box {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  padding: 1rem 1.3rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+}
+
+.error-box ul {
+  padding-left: 1.2rem;
+}
