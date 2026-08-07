@@ -58,10 +58,25 @@ async function logoutUser(req, res, next) {
   });
 }
 
+async function getJoinClubForm(req, res) {
+  res.render("join-club");
+}
+
+async function postJoinClubForm(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.render("join-club", { errors: errors.array() });
+  }
+  await db.updateMemberStatus(req.user.id, "membership");
+  res.redirect("/join-club");
+}
+
 module.exports = {
   getSignupForm,
   postSignupForm,
   getLoginForm,
   postLoginForm,
   logoutUser,
+  getJoinClubForm,
+  postJoinClubForm,
 };
