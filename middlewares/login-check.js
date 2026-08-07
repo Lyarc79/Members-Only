@@ -7,7 +7,7 @@ function isGuest(req, res, next) {
 
 function isAuth(req, res, next) {
   if (req.isAuthenticated()) {
-    next();
+    return next();
   }
   res.redirect("/");
 }
