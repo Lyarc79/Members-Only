@@ -22,8 +22,17 @@ async function getUserById(id) {
   return rows[0];
 }
 
+async function updateMemberStatus(id, column) {
+  const allowedColumns = ["membership", "admin"];
+  if (!allowedColumns.includes(column)) {
+    throw new Error("Invalid column name");
+  }
+  await pool.query(`UPDATE members SET ${column} = true WHERE id = $1`, [id]);
+}
+
 module.exports = {
   createUser,
   getUserByUsername,
   getUserById,
+  updateMemberStatus,
 };
