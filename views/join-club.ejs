@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head") %>
+  </head>
+  <body>
+    <%- include("partials/header") %>
+    <main class="main-wrapper">
+        <% if(user.membership) {%>
+            <h2>You guessed the answer!</h2>
+            <p>Welcome to the Club</p>
+            <a href="/">Back to home</a>
+        <% } else { %>
+            <h1>Wanna join the club?</h1>
+            <p>I hope you like riddles, this one should be easy!</p>
+            <p>"I fly without wings. I cry withut eyes. Wherever I go, darkness flies. What am I?"</p>
+             <%- include("partials/validationErrors") %>
+             <form action="/join-club" id="joinclub-form" method="POST">
+                <label for="password">Enter your answer:</label>
+                <input type="password" name="password" id="password" required>
+                <button type="submit">Submit</button>
+             </form>
+        <% } %>
+    </main>
+  </body>
+</html>
