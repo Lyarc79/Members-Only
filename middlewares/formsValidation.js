@@ -19,26 +19,44 @@ const validateSignup = [
   body("username")
     .trim()
     .isEmail()
-    .withMessage("You must enter a valid email adress (e.g., example@mail.com)")
+    .withMessage(
+      "You must enter a valid email adress (e.g., example@mail.com).",
+    )
     .custom(async (value) => {
       const user = await db.getUserByUsername(value);
       if (user) {
-        throw new Error("E-mail is already in use");
+        throw new Error("E-mail is already in use.");
       }
     }),
 
   body("password")
     .trim()
-    .isLength({ min: 6 })
+    .isLength({ min: 5 })
     .withMessage("Password must be longer than 5 characters."),
 
   body("confirmPassword")
     .custom((value, { req }) => {
       return value === req.body.password;
     })
-    .withMessage("Passwords don't match"),
+    .withMessage("Passwords don't match."),
+];
+
+const validateClubPasscode = [
+  body("password")
+    .trim()
+    .toLowerCase()
+    .isLength({ min: 2, max: 10 })
+    .withMessage("The answer is longer than 2 characters and shorter than 10.")
+    .custom((value) => {
+      const correctPasscode = process.env.CLUB_PASSCODE;
+      if (value !== correctPasscode) {
+        throw new Error("That's not the answer to the riddle!");
+      }
+      return true;
+    }),
 ];
 
 module.exports = {
   validateSignup,
+  validateClubPasscode,
 };
