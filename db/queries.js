@@ -30,9 +30,29 @@ async function updateMemberStatus(id, column) {
   await pool.query(`UPDATE members SET ${column} = true WHERE id = $1`, [id]);
 }
 
+async function createMessage(userId, title, body) {
+  await pool.query(
+    "INSERT INTO messages (user_id, title, body) VALUES ($1, $2, $3)",
+    [userId, title, body],
+  );
+}
+
+async function displayAllMessages() {
+  const { rows } = await pool.query(
+    `SELECT messages.id, members.first_name, members.last_name, members.username,
+          messages.title, messages.body, messages.created_at 
+    FROM messages 
+    INNER JOIN members ON members.id = messages.user_id 
+    ORDER BY messages.created_at DESC`,
+  );
+  return rows;
+}
+
 module.exports = {
   createUser,
   getUserByUsername,
   getUserById,
   updateMemberStatus,
+  createMessage,
+  displayAllMessages,
 };
