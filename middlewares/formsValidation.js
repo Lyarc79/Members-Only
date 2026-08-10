@@ -56,7 +56,20 @@ const validateClubPasscode = [
     }),
 ];
 
+const validateMessage = [
+  body("title")
+    .trim()
+    .isLength({ min: 1, max: 30 })
+    .withMessage("Title must be between 1 and 30 characters long."),
+
+  body("body")
+    .trim()
+    .isLength({ min: 10, max: 400 })
+    .withMessage("Message content must be between 10 and 400 characters long."),
+];
+
 module.exports = {
   validateSignup,
   validateClubPasscode,
+  validateMessage,
 };
