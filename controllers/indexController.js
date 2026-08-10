@@ -71,6 +71,25 @@ async function postJoinClubForm(req, res) {
   res.redirect("/join-club");
 }
 
+async function getNewMessageForm(req, res) {
+  res.render("new-message");
+}
+
+async function postNewMessageForm(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.render("new-message", { errors: errors.array() });
+  }
+  const { title, body } = req.body;
+  await db.createMessage(req.user.id, title, body);
+  res.redirect("/");
+}
+
+async function getIndexInfo(req, res) {
+  const messages = await db.displayAllMessages();
+  res.render("index", { messages });
+}
+
 module.exports = {
   getSignupForm,
   postSignupForm,
@@ -79,4 +98,7 @@ module.exports = {
   logoutUser,
   getJoinClubForm,
   postJoinClubForm,
+  getNewMessageForm,
+  postNewMessageForm,
+  getIndexInfo,
 };
