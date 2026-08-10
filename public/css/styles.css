@@ -43,6 +43,19 @@ main {
   max-width: 1200px;
 }
 
+.messages {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #f1f1f1;
+}
+
+.message-container {
+  padding: 1rem;
+  border: 1px solid black;
+}
+
 /* =========================================
     ERROR BOX & PAGE
    ========================================= */
