@@ -13,9 +13,9 @@
         <% messages.forEach(message => { %>
           <div class="message-container">
             <div class="user-info">
-              <p class="user-fullname"><%= locals.user ? `${message.first_name} ${message.last_name}` : '*** ***' %></p>
-              <p class="username"><%= locals.user ? message.username : '*****' %></p>
-              <p class="date-posted"><%=locals.user ? message.created_at : '*** ** ***' %></p>
+              <p class="user-fullname"><%= locals.user?.membership ? `${message.first_name} ${message.last_name}` : '*** ***' %></p>
+              <p class="username"><%= locals.user?.membership ? message.username : '*****' %></p>
+              <p class="date-posted"><%=locals.user?.membership ? message.created_at : '*** ** ***' %></p>
             </div>
             <div class="message-data">
               <h3 class="message-title"><%= message.title %></h3>
