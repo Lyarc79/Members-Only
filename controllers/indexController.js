@@ -90,6 +90,25 @@ async function getIndexInfo(req, res) {
   res.render("index", { messages });
 }
 
+async function getBecomeAdminForm(req, res) {
+  res.render("become-admin");
+}
+
+async function postBecomeAdminForm(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.render("become-admin", { errors: errors.array() });
+  }
+  await db.updateMemberStatus(req.user.id, "admin");
+  res.redirect("/become-admin");
+}
+
+async function deleteMessage(req, res) {
+  const { id } = req.params;
+  await db.deleteMessage(id);
+  res.redirect("/");
+}
+
 module.exports = {
   getSignupForm,
   postSignupForm,
@@ -101,4 +120,7 @@ module.exports = {
   getNewMessageForm,
   postNewMessageForm,
   getIndexInfo,
+  getBecomeAdminForm,
+  postBecomeAdminForm,
+  deleteMessage,
 };
