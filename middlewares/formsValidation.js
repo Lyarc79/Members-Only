@@ -68,8 +68,21 @@ const validateMessage = [
     .withMessage("Message content must be between 10 and 400 characters long."),
 ];
 
+const validateAdminPasscode = [
+  body("password")
+    .trim()
+    .custom((value) => {
+      const correctPasscode = process.env.ADMIN_PASSCODE;
+      if (value !== correctPasscode) {
+        throw new Error("That's not the admin password.");
+      }
+      return true;
+    }),
+];
+
 module.exports = {
   validateSignup,
   validateClubPasscode,
   validateMessage,
+  validateAdminPasscode,
 };
