@@ -7,6 +7,9 @@
       <% if(!locals.user.membership) { %>
       <a href="/join-club" class="header-link joinclub-btn">Join Club</a>
       <% } %>
+      <% if(!locals.user.admin) { %>
+      <a href="/become-admin" class="header-link becomeadmin-btn">Become Admin</a>
+      <% } %>
       <a href="/logout" class="header-link logout-btn">Log out</a>
     <% } else { %>
       <a href="/login" class="header-link login-btn">Log in</a>

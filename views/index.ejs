@@ -12,6 +12,11 @@
       <div class="messages">
         <% messages.forEach(message => { %>
           <div class="message-container">
+            <% if(locals.user?.admin) { %>
+              <form action="/messages/<%= message.id %>/delete" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+            <% } %>
             <div class="user-info">
               <p class="user-fullname"><%= locals.user?.membership ? `${message.first_name} ${message.last_name}` : '*** ***' %></p>
               <p class="username"><%= locals.user?.membership ? message.username : '*****' %></p>

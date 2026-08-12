@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head") %>
+  </head>
+  <body>
+    <%- include("partials/header") %>
+    <main class="main-wrapper">
+        <% if(user.admin) {%>
+            <h2>The password was correct</h2>
+            <p>Admin rights granted</p>
+            <a href="/">Back to home</a>
+        <% } else { %>
+            <h1>Become admin</h1>
+             <%- include("partials/validationErrors") %>
+             <form action="/become-admin" id="becomeadmin-form" method="POST">
+                <label for="password">Enter the password</label>
+                <input type="password" name="password" id="password" required>
+                <button type="submit">Submit</button>
+             </form>
+        <% } %>
+    </main>
+  </body>
+</html>
