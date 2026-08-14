@@ -86,7 +86,15 @@ async function postNewMessageForm(req, res) {
 }
 
 async function getIndexInfo(req, res) {
-  const messages = await db.displayAllMessages();
+  const rawMessages = await db.displayAllMessages();
+  const messages = rawMessages.map((msg) => ({
+    ...msg,
+    formattedDate: new Date(msg.created_at).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }),
+  }));
   res.render("index", { messages });
 }
 

@@ -7,7 +7,7 @@
     <%- include("partials/header") %>
     <main class="main-wrapper">
       <% if(locals.user) { %>
-        <a href="/new-message">New message</a>
+        <a href="/new-message" class="newmessage-btn">New message</a>
       <% } %>
       <div class="messages">
         <% messages.forEach(message => { %>
@@ -20,7 +20,7 @@
             <div class="user-info">
               <p class="user-fullname"><%= locals.user?.membership ? `${message.first_name} ${message.last_name}` : '*** ***' %></p>
               <p class="username"><%= locals.user?.membership ? message.username : '*****' %></p>
-              <p class="date-posted"><%=locals.user?.membership ? message.created_at : '*** ** ***' %></p>
+              <p class="date-posted"><%=locals.user?.membership ? message.formattedDate : '*** ** ***' %></p>
             </div>
             <div class="message-data">
               <h3 class="message-title"><%= message.title %></h3>
