@@ -19,8 +19,11 @@
             <% } %>
             <div class="user-info">
               <p class="user-fullname"><%= locals.user?.membership ? `${message.first_name} ${message.last_name}` : '*** ***' %></p>
-              <p class="username"><%= locals.user?.membership ? message.username : '*****' %></p>
-              <p class="date-posted"><%=locals.user?.membership ? message.formattedDate : '*** ** ***' %></p>
+              <div class="user-meta">
+                <p class="username"><%= locals.user?.membership ? message.username : '*****' %></p>
+                <span class="dot">•</span>
+                <p class="date-posted"><%=locals.user?.membership ? message.formattedDate : '*** ** ***' %></p>
+              </div>
             </div>
             <div class="message-data">
               <h3 class="message-title"><%= message.title %></h3>
